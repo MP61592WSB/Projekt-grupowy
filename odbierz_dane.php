@@ -3,7 +3,7 @@
     header("Content-type: text/xml");
 	header("Cache-Control: no-cache");
 
-	$link = mysqli_connect("chatbaza.mysql.database.azure.com", "chatadmin@chatbaza", "Pa$$w0rd1234", "chatbaza");
+	$link = mysqli_connect("chatbaza.mysql.database.azure.com", "chatadmin@chatbaza", "Passw0rd1234", "chatbaza");
 
 	mysqli_query($link, "SET NAMES 'utf8'");
 
