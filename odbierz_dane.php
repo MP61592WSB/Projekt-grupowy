@@ -1,9 +1,8 @@
 <?php
-    
+    include "connectionDB.php";
+
     header("Content-type: text/xml");
 	header("Cache-Control: no-cache");
-
-	$link = mysqli_connect("chatbaza.mysql.database.azure.com", "chatadmin@chatbaza", "Passw0rd1234", "chatbaza");
 
 	mysqli_query($link, "SET NAMES 'utf8'");
 
@@ -11,15 +10,15 @@
     $nick = mysqli_real_escape_string($link, $_POST['nick']);
 	$text = mysqli_real_escape_string($link, $_POST['text']);
     $action = mysqli_real_escape_string($link, $_POST['action']);
+    $error = "fail";
 
-    if($action == "post")
+    if($action == "post" && $nick != "" && $text != "")
     {
         mysqli_query($link, "INSERT INTO wiadomosci (nick, tresc, czas) VALUES ('$nick', '$text',".time().")");
         $tmp = mysqli_insert_id($link) - 10;
         mysqli_query($link, "DELETE FROM wiadomosci WHERE id < ".$tmp);
     }
-
-
+   
 	$results = mysqli_query($link, "SELECT nick, tresc, czas FROM wiadomosci WHERE czas > ".$time." ORDER BY id");
     
 
